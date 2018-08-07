@@ -1,8 +1,8 @@
 # SYNOPSIS 
-[![NPM Package](https://img.shields.io/npm/v/merkle-patricia-tree.svg?style=flat-square)](https://www.npmjs.org/package/merkle-patricia-tree)
-[![Build Status](https://img.shields.io/travis/ethereumjs/merkle-patricia-tree.svg?branch=master&style=flat-square)](https://travis-ci.org/ethereumjs/merkle-patricia-tree)
-[![Coverage Status](https://img.shields.io/coveralls/ethereumjs/merkle-patricia-tree.svg?style=flat-square)](https://coveralls.io/r/ethereumjs/merkle-patricia-tree)
-[![Gitter](https://img.shields.io/gitter/room/ethereum/ethereumjs-lib.svg?style=flat-square)](https://gitter.im/ethereum/ethereumjs-lib) or #ethereumjs on freenode  
+[![NPM Package](https://img.shields.io/npm/v/icjs-mpt.svg?style=flat-square)](https://www.npmjs.org/package/icjs-mpt)
+[![Build Status](https://img.shields.io/travis/icjs/icjs-mpt.svg?branch=master&style=flat-square)](https://travis-ci.org/icjs/icjs-mpt)
+[![Coverage Status](https://img.shields.io/coveralls/icjs/icjs-mpt.svg?style=flat-square)](https://coveralls.io/r/icjs/icjs-mpt)
+[![Gitter](https://img.shields.io/gitter/room/irchain/icjs-lib.svg?style=flat-square)](https://gitter.im/irchain/icjs-lib) or #icjs on freenode
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)  
 
@@ -14,14 +14,14 @@ This is an implementation of the modified merkle patricia tree as specified in t
 The only backing store supported is LevelDB through the ```levelup``` module.
 
 # INSTALL
- `npm install merkle-patricia-tree`
+ `npm install icjs-mpt`
 
 # USAGE
 
 ## Initialization and Basic Usage
 
 ```javascript
-var Trie = require('merkle-patricia-tree'),
+var Trie = require('icjs-mpt'),
 levelup = require('levelup'),
 db = levelup('./testdb'),
 trie = new Trie(db); 
@@ -74,10 +74,10 @@ trie.createReadStream()
 
 # REFERENCES
 
-- ["Exploring Ethereum's state trie with Node.js"](https://wanderer.github.io/ethereum/nodejs/code/2014/05/21/using-ethereums-tries-with-node/) blog post
-- ["Merkling in Ethereum"](https://blog.ethereum.org/2015/11/15/merkling-in-ethereum/) blog post
-- [Ethereum Trie Specification](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Wiki
-- ["Understanding the ethereum trie"](https://easythereentropy.wordpress.com/2014/06/04/understanding-the-ethereum-trie/) blog post
+- ["Exploring IrChain's state trie with Node.js"](https://wanderer.github.io/irchain/nodejs/code/2014/05/21/using-irchains-tries-with-node/) blog post
+- ["Merkling in Ethereum"](https://blog.irchain.org/2015/11/15/merkling-in-irchain/) blog post
+- [Ethereum Trie Specification](https://github.com/irchain/wiki/wiki/Patricia-Tree) Wiki
+- ["Understanding the irchain trie"](https://easythereentropy.wordpress.com/2014/06/04/understanding-the-irchain-trie/) blog post
 - ["Trie and Patricia Trie Overview"](https://www.youtube.com/watch?v=jXAHLqQthKw&t=26s) Video Talk on Youtube
 
 # LICENSE

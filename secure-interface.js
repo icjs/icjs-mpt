@@ -1,4 +1,4 @@
-const ethUtil = require('ethereumjs-util')
+const ircUtil = require('icjs-util')
 
 module.exports = secureInterface
 
@@ -18,7 +18,7 @@ function copy (_super) {
 }
 
 function get (_super, key, cb) {
-  var hash = ethUtil.sha3(key)
+  var hash = ircUtil.sha3(key)
   _super(hash, cb)
 }
 
@@ -28,12 +28,12 @@ function put (_super, key, val, cb) {
   if (!val) {
     this.del(key, cb)
   } else {
-    var hash = ethUtil.sha3(key)
+    var hash = ircUtil.sha3(key)
     _super(hash, val, cb)
   }
 }
 
 function del (_super, key, cb) {
-  var hash = ethUtil.sha3(key)
+  var hash = ircUtil.sha3(key)
   _super(hash, cb)
 }

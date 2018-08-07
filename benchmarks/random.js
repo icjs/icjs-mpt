@@ -1,7 +1,6 @@
-// https://github.com/ethereum/wiki/wiki/Benchmarks
 'use strict'
 const Trie = require('../')
-const ethUtil = require('ethereumjs-util')
+const ircUtil = require('icjs-util')
 const async = require('async')
 
 const ROUNDS = 1000
@@ -9,7 +8,7 @@ const SYMMETRIC = true
 const ERA_SIZE = 1000
 
 let trie = new Trie()
-let seed = new Buffer(32).fill(0)
+let seed = Buffer.alloc(32).fill(0)
 
 let testName = 'rounds ' + ROUNDS + ' ' + ERA_SIZE + ' ' + SYMMETRIC ? 'sys' : 'rand'
 console.time(testName)
@@ -25,11 +24,11 @@ function run (cb) {
       return i <= ROUNDS
     },
     function (done) {
-      seed = ethUtil.sha3(seed)
+      seed = ircUtil.sha3(seed)
       if (SYMMETRIC) {
         trie.put(seed, seed, genRoot)
       } else {
-        let val = ethUtil.sha3(seed)
+        let val = ircUtil.sha3(seed)
         trie.put(seed, val, genRoot)
       }
 

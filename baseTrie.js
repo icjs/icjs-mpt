@@ -3,7 +3,7 @@ const levelup = require('levelup')
 const memdown = require('memdown')
 const async = require('async')
 const rlp = require('rlp')
-const ethUtil = require('ethereumjs-util')
+const ircUtil = require('icjs-util')
 const semaphore = require('semaphore')
 const TrieNode = require('./trieNode')
 const ReadStream = require('./readStream')
@@ -16,7 +16,7 @@ const asyncFirstSeries = require('./util').asyncFirstSeries
 module.exports = Trie
 
 /**
- * Use `require('merkel-patricia-tree')` for the base interface. In Ethereum applications stick with the Secure Trie Overlay `require('merkel-patricia-tree/secure')`. The API for the raw and the secure interface are about the same
+ * Use `require('merkel-patricia-tree')` for the base interface. In IrChain applications stick with the Secure Trie Overlay `require('merkel-patricia-tree/secure')`. The API for the raw and the secure interface are about the same
  * @class Trie
  * @param {Object} [db] An instance of [levelup](https://github.com/rvagg/node-levelup/) or a compatible API. If the db is `null` or left undefined, then the trie will be stored in memory via [memdown](https://github.com/rvagg/memdown)
  * @param {Buffer|String} [root]` A hex `String` or `Buffer` for the root of a previously stored trie
@@ -26,7 +26,7 @@ module.exports = Trie
  */
 function Trie (db, root) {
   var self = this
-  this.EMPTY_TRIE_ROOT = ethUtil.SHA3_RLP
+  this.EMPTY_TRIE_ROOT = ircUtil.SHA3_RLP
   this.sem = semaphore(1)
 
   // setup dbs
@@ -41,7 +41,7 @@ function Trie (db, root) {
   Object.defineProperty(this, 'root', {
     set: function (value) {
       if (value) {
-        value = ethUtil.toBuffer(value)
+        value = ircUtil.toBuffer(value)
         assert(value.length === 32, 'Invalid root length. Roots are 32 bytes')
       } else {
         value = self.EMPTY_TRIE_ROOT
@@ -66,7 +66,7 @@ function Trie (db, root) {
 Trie.prototype.get = function (key, cb) {
   var self = this
 
-  key = ethUtil.toBuffer(key)
+  key = ircUtil.toBuffer(key)
 
   self.findPath(key, function (err, node, remainder, stack) {
     var value = null
@@ -88,8 +88,8 @@ Trie.prototype.get = function (key, cb) {
 Trie.prototype.put = function (key, value, cb) {
   var self = this
 
-  key = ethUtil.toBuffer(key)
-  value = ethUtil.toBuffer(value)
+  key = ircUtil.toBuffer(key)
+  value = ircUtil.toBuffer(value)
 
   if (!value || value.toString() === '') {
     self.del(key, cb)
@@ -97,7 +97,7 @@ Trie.prototype.put = function (key, value, cb) {
     cb = callTogether(cb, self.sem.leave)
 
     self.sem.take(function () {
-      if (self.root.toString('hex') !== ethUtil.SHA3_RLP.toString('hex')) {
+      if (self.root.toString('hex') !== ircUtil.SHA3_RLP.toString('hex')) {
         // first try to find the give key or its nearst node
         self.findPath(key, function (err, foundValue, keyRemainder, stack) {
           if (err) {
@@ -122,7 +122,7 @@ Trie.prototype.put = function (key, value, cb) {
 Trie.prototype.del = function (key, cb) {
   var self = this
 
-  key = ethUtil.toBuffer(key)
+  key = ircUtil.toBuffer(key)
   cb = callTogether(cb, self.sem.leave)
 
   self.sem.take(function () {
@@ -146,7 +146,7 @@ Trie.prototype.del = function (key, cb) {
  * @param {Function} callback A callback `Function`, which is given the arguments `err` - for errors that may have occured and `value` - the found value in a `Buffer` or if no value was found `null`.
  */
 Trie.prototype.getRaw = function (key, cb) {
-  key = ethUtil.toBuffer(key)
+  key = ircUtil.toBuffer(key)
 
   function dbGet (db, cb2) {
     db.get(key, {
@@ -449,7 +449,7 @@ Trie.prototype._walkTrie = function (root, onNode, onDone) {
   var aborted = false
   var returnValues = []
 
-  if (root.toString('hex') === ethUtil.SHA3_RLP.toString('hex')) {
+  if (root.toString('hex') === ircUtil.SHA3_RLP.toString('hex')) {
     return onDone()
   }
 
@@ -759,7 +759,7 @@ Trie.prototype.batch = function (ops, cb) {
  * @param {Function} cb
  */
 Trie.prototype.checkRoot = function (root, cb) {
-  root = ethUtil.toBuffer(root)
+  root = ircUtil.toBuffer(root)
   this._lookupNode(root, function (value) {
     cb(null, !!value)
   })

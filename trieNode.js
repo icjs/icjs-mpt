@@ -1,5 +1,5 @@
 const rlp = require('rlp')
-const ethUtil = require('ethereumjs-util')
+const ircUtil = require('icjs-util')
 
 module.exports = TrieNode
 
@@ -112,7 +112,7 @@ TrieNode.prototype.serialize = function () {
 }
 
 TrieNode.prototype.hash = function () {
-  return ethUtil.sha3(this.serialize())
+  return ircUtil.sha3(this.serialize())
 }
 
 TrieNode.prototype.toString = function () {
@@ -203,7 +203,7 @@ function isTerminator (key) {
  * @param {Buffer| String} key
  */
 function stringToNibbles (key) {
-  var bkey = new Buffer(key)
+  var bkey = Buffer.from(key)
   var nibbles = []
 
   for (var i = 0; i < bkey.length; i++) {
@@ -221,7 +221,7 @@ function stringToNibbles (key) {
  * @param arr
  */
 function nibblesToBuffer (arr) {
-  var buf = new Buffer(arr.length / 2)
+  var buf = Buffer.alloc(arr.length / 2)
   for (var i = 0; i < buf.length; i++) {
     var q = i * 2
     buf[i] = (arr[q] << 4) + arr[++q]

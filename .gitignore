@@ -1,1 +1,9 @@
+# Npm dependence files
 node_modules
+
+# JetBrains IDE temporary
+.idea
+
+# Dependencies lock files
+package-lock.json
+yarn.lock

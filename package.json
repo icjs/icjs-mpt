@@ -1,6 +1,6 @@
 {
-  "name": "merkle-patricia-tree",
-  "version": "2.3.1",
+  "name": "icjs-mpt",
+  "version": "0.0.1",
   "description": "This is an implementation of the modified merkle patricia tree as speficed in the Ethereum's yellow paper.",
   "main": "index.js",
   "scripts": {
@@ -12,29 +12,27 @@
     "test:browser": "karma start karma.conf.js",
     "test:node": "tape ./test/*.js",
     "build": "browserify --s Trie index.js > ./dist/trie.js",
-    "build:docs": "documentation --github  -f md ./index.js ./secure.js ./proof.js > ./docs/index-template.md"
+    "build:docs": "documentation build index.js secure.js proof.js -f md > ./docs/index.md"
   },
-  "author": {
-    "name": "mjbecze",
-    "email": "mjbecze@gmail.com"
-  },
+  "author": "ldcc <eldhrimnirs@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ethereumjs/merkle-patricia-tree.git"
+    "url": "git+https://github.com/icjs/icjs-mpt.git"
   },
   "bugs": {
-    "url": "https://github.com/ethereumjs/merkle-patricia-tree/issues"
+    "url": "https://github.com/icjs/icjs-mpt/issues"
   },
   "keywords": [
     "merkle",
     "radix",
     "trie",
-    "ethereum"
+    "patricia",
+    "irchain"
   ],
   "license": "MPL-2.0",
   "dependencies": {
     "async": "^1.4.2",
-    "ethereumjs-util": "^5.0.0",
+    "icjs-util": "^0.0.1",
     "level-ws": "0.0.0",
     "levelup": "^1.2.1",
     "memdown": "^1.0.0",
@@ -45,8 +43,8 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "coveralls": "^2.11.6",
-    "documentation": "^3.0.4",
-    "ethereumjs-testing": "0.0.1",
+    "documentation": "^8.1.0",
+    "icjs-testing": "0.0.1",
     "istanbul": "^0.4.1",
     "karma": "^1.7.1",
     "karma-browserify": "^5.0.0",
@@ -55,7 +53,7 @@
     "karma-env-preprocessor": "^0.1.1",
     "karma-firefox-launcher": "^1.0.1",
     "karma-tap": "^1.0.3",
-    "standard": "^5.3.1",
+    "standard": "^11.0.1",
     "tape": "^4.4.0"
   },
   "standard": {
@@ -67,5 +65,10 @@
   },
   "contributors": [
     "Aaron Kumavis <http://aaron.kumavis.me/> (https://github.com/kumavis)"
-  ]
+  ],
+  "homepage": "https://github.com/icjs/icjs-mpt#readme",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  }
 }

@@ -1,5 +1,5 @@
 const TrieNode = require('./trieNode')
-const ethUtil = require('ethereumjs-util')
+const ircUtil = require('icjs-util')
 const matchingNibbleLength = require('./util').matchingNibbleLength
 
 /**
@@ -38,14 +38,14 @@ exports.prove = function (trie, key, cb) {
  */
 exports.verifyProof = function (rootHash, key, proof, cb) {
   key = TrieNode.stringToNibbles(key)
-  var wantHash = ethUtil.toBuffer(rootHash)
+  var wantHash = ircUtil.toBuffer(rootHash)
   for (var i = 0; i < proof.length; i++) {
-    var p = ethUtil.toBuffer(proof[i])
-    var hash = ethUtil.sha3(proof[i])
+    var p = ircUtil.toBuffer(proof[i])
+    var hash = ircUtil.sha3(proof[i])
     if (Buffer.compare(hash, wantHash)) {
       return cb(new Error('Bad proof node ' + i + ': hash mismatch'))
     }
-    var node = new TrieNode(ethUtil.rlp.decode(p))
+    var node = new TrieNode(ircUtil.rlp.decode(p))
     var cld
     if (node.type === 'branch') {
       if (key.length === 0) {

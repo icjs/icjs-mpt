@@ -6,7 +6,7 @@ module.exports = SecureTrie
 inherits(SecureTrie, CheckpointTrie)
 
 /**
- * You can create a secure Trie where the keys are automatically hashed using **SHA3** by using `require('merkle-patricia-tree/secure')`. It has the same methods and constuctor as `Trie`
+ * You can create a secure Trie where the keys are automatically hashed using **SHA3** by using `require('icjs-mpt/secure')`. It has the same methods and constuctor as `Trie`
  * @class SecureTrie
  * @extends Trie
  */
